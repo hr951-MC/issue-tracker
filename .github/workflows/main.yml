@@ -11,5 +11,5 @@ jobs:
       - name: Add Issue to Project
         uses: actions/add-to-project@v0.3.0
         with:
-          project-url: https://github.com/orgs/ElementX-Network/projects/1
+          project-url: https://github.com/orgs/hr951-MC/projects/1
           github-token: ${{ secrets.TOKEN }}
