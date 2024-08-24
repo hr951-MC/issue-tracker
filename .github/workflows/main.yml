@@ -16,5 +16,3 @@ jobs:
           # to the issue
           project-url: https://github.com/orgs/hr951-MC/projects/1
           github-token: ${{ secrets.TOKEN }}
-          labeled: bug, needs-triage
-          label-operator: OR
