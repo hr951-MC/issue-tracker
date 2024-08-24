@@ -15,12 +15,6 @@ jobs:
     with:
       app_id: ${{ secrets.APP_ID }}
       private_key: ${{ secrets.TOKEN }}
-
-  - name: Checkout private repo
-    uses: actions/checkout@v4
-    with:
-      repository: getsentry/my-private-repo
-     token: ${{ steps.my-app.outputs.token }}
       
       - name: Add Issue to Project
         uses: actions/add-to-project@v0.3.0
