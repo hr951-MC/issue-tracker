@@ -1,39 +1,29 @@
 name: issue-to-project
 on:
-  push:
-    branches:
-      - main
+  issues:
+    types:
+      - opened
 
 jobs:
-  job:
-    runs-on: ubuntu-latest
+  manage_project:
+    runs-on: ubuntu-22.04
     steps:
-      - id: create_token
-        uses: tibdex/github-app-token@v2
+
+       - name: my-app-install token
+    id: my-app
+    uses: getsentry/action-github-app-token@v3
+    with:
+      app_id: ${{ secrets.APP_ID }}
+      private_key: ${{ secrets.TOKEN }}
+
+  - name: Checkout private repo
+    uses: actions/checkout@v4
+    with:
+      repository: getsentry/my-private-repo
+     token: ${{ steps.my-app.outputs.token }}
+      
+      - name: Add Issue to Project
+        uses: actions/add-to-project@v0.3.0
         with:
-          app_id: ${{ secrets.APP_ID }}
-
-          # Optional.
-          # github_api_url: https://api.example.com
-
-          # Optional.
-          # installation_retrieval_mode: id
-
-          # Optional.
-          # installation_retrieval_payload: 1337
-
-          # Optional.
-          # Using a YAML multiline string to avoid escaping the JSON quotes.
-          # permissions: >-
-          #   {"pull_requests": "read"}
-
-          private_key: ${{ secrets.TOKEN }}
-
-          # Optional.
-          # repositories: >-
-          #   ["actions/toolkit", "github/docs"]
-
-          # Optional.
-          # revoke: false
-
-      - run: "echo 'The created token is masked: ${{ steps.create_token.outputs.token }}'"
+          project-url: https://github.com/orgs/hr951-MC/projects/1
+          github-token: ${{ steps.my-app.outputs.token }}
