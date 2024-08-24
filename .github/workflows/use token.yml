@@ -8,6 +8,8 @@ jobs:
   manage_project:
     runs-on: ubuntu-22.04
     steps:
+      - name: get_token
+        run 
       - name: Add Issue to Project
         uses: actions/add-to-project@v0.3.0
         with:
