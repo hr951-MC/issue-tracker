@@ -1,18 +1,39 @@
-name: Run tests on staging
+name: issue-to-project
 on:
   push:
     branches:
       - main
 
 jobs:
-  hello-world:
+  job:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/create-github-app-token@v1
-        id: app-token
+      - id: create_token
+        uses: tibdex/github-app-token@v2
         with:
-          app-id: ${{ secrets.APP_ID }}
-          private-key: ${{ secrets.TOKEN }}
-      - uses: ./actions/staging-tests
-        with:
-          token: ${{ steps.app-token.outputs.token }}
+          app_id: ${{ secrets.APP_ID }}
+
+          # Optional.
+          # github_api_url: https://api.example.com
+
+          # Optional.
+          # installation_retrieval_mode: id
+
+          # Optional.
+          # installation_retrieval_payload: 1337
+
+          # Optional.
+          # Using a YAML multiline string to avoid escaping the JSON quotes.
+          # permissions: >-
+          #   {"pull_requests": "read"}
+
+          private_key: ${{ secrets.TOKEN }}
+
+          # Optional.
+          # repositories: >-
+          #   ["actions/toolkit", "github/docs"]
+
+          # Optional.
+          # revoke: false
+
+      - run: "echo 'The created token is masked: ${{ steps.create_token.outputs.token }}'"
