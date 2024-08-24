@@ -19,5 +19,5 @@ jobs:
         with:
           # You can target a project in a different organization
           # to the issue
-          project-url: https://github.com/orgs/hr951-MC/projects/1
+          project-url: https://github.com/orgs/hr951-mc/projects/1
           github-token: ${{ steps.app-token.outputs.token }}
